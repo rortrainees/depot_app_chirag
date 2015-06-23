@@ -1,0 +1,16 @@
+/home/chirag/.rvm/rubies/ruby-1.9.3-p551/bin/ruby -r ./siteconf20150622-4662-b1ola4.rb extconf.rb
+checking for mysql_ssl_set()... yes
+checking for rb_str_set_len()... yes
+checking for rb_thread_start_timer()... no
+checking for mysql.h... yes
+creating Makefile
+
+make  clean
+
+make
+compiling mysql.c
+linking shared-object mysql/mysql_api.so
+
+make  install
+/usr/bin/install -c -m 0755 mysql_api.so .gem.20150622-4662-40rpbd/mysql
+installing default mysql_api libraries

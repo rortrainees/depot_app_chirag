@@ -20,6 +20,14 @@
   <%= @order.pay_type %>
 </p>
 
+<%#= button_to "Confirm Your Order", { redirect_to (store_url), :notice => I18n.t('.thanks') } %>
+<%#= button_to "Confirm Your Order", confirm_order_path, :method => :get %>
+<%= button_to "Confirm Your Order", { :controller => "orders", :action => "confirm"} %>
+
+<div class="field">
+    <h3>Pay Via Paypal</h3>
+    <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif") %>
+</div>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

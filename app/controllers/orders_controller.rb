@@ -23,6 +23,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def confirm
+    
+  end
+
   # GET /orders/new
   # GET /orders/new.xml
   def new
@@ -57,8 +61,10 @@ class OrdersController < ApplicationController
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         Notifier.order_received(@order).deliver
-           format.html { redirect_to (store_url), :notice => I18n.t('.thanks') }
-            format.xml { render :xml => @order, :status => :created,:location => @order }
+           #format.html { redirect_to (store_url), :notice => I18n.t('.thanks') }
+           format.html { redirect_to (@order), notice: 'User was successfully created.' }
+           #format.xml { render :xml => @order, :status => :created,:location => @order }
+            format.xml { render :show, :status => :created,:location => @order }
         else
          
           format.html { render :action => "new" }
@@ -66,6 +72,7 @@ class OrdersController < ApplicationController
         end
      end
   end
+
   # PUT /orders/1
   # PUT /orders/1.xml
   def update

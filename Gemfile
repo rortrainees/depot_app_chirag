@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'activemerchant'
+
 gem 'rails', '3.0.5'
 
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

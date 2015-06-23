@@ -1,4 +1,5 @@
 DepotApp::Application.routes.draw do
+  get 'confirm'=>'orders#confirm'
 
   get 'admin' => 'admin#index'
   controller :sessions do
@@ -16,6 +17,9 @@ DepotApp::Application.routes.draw do
     end
     root :to => 'store#index', :as => 'store'
   end
+
+  get "paypal_express/checkout"
+  post "paypal_express/checkout"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

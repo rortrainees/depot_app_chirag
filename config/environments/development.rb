@@ -1,4 +1,9 @@
 DepotApp::Application.configure do
+
+    config.after_initialize do
+      ActiveMerchant::Billing::Base.mode = :test
+    end
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on

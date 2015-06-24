@@ -1,4 +1,14 @@
 DepotApp::Application.configure do
+
+    config.after_initialize do
+      ActiveMerchant::Billing::Base.mode = :production
+      paypal_options = {
+        :login => "edwardmaya0008_api1.gmail.com",
+        :password => "9MZ4CD6NERZY77YL",
+        :signature => "AklW7jQ7Jz9LrfTvr5hj1iaQiZb6APnCuYSQTmNEijI3yeIXNDAdt.FT"
+      }
+      ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+    end
   # Settings specified here will take precedence over those in config/application.rb
 
   # The production environment is meant for finished, "live" apps.

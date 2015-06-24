@@ -24,7 +24,40 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    
+=begin
+    @order = Order.new(params[:order])
+    @order.add_line_items_from_cart(current_cart)
+
+    respond_to do |format|
+      if @order.save
+        Cart.destroy(session[:cart_id])
+        session[:cart_id] = nil
+        Notifier.order_received(@order).deliver
+           #format.html { redirect_to (store_url), :notice => I18n.t('.thanks') }
+           format.html { redirect_to (@order), notice: 'Order was successfully created.' }
+           #format.xml { render :xml => @order, :status => :created,:location => @order }
+            format.xml { render :show, :status => :created,:location => @order }
+        else
+         
+          format.html { render :action => "new" }
+          format.xml { render :xml => @order.errors, :status => :unprocessable_entity }
+        end
+     end    
+=end
+  end
+
+  def paypalpayment
+    #redirect_to URI.encode("https://www.sandbox.paypal.com/cgi-bin/webscr")
+    puts"++++++++++++++++++++++++++++++++++++++++++++"
+    @order = Order.first
+    cart = Cart.find(current_cart.id)
+     puts "#{cart.inspect}"
+      puts "#{cart.total_price}"
+    value = cart.total_price
+    puts "==================================================="
+   puts "#{value}"
+    redirect_to @order.paypal_url(order_path(@order),value)
+    #render js: "alert('Hello Rails');"
   end
 
   # GET /orders/new
@@ -54,17 +87,19 @@ class OrdersController < ApplicationController
   # POST /orders.xml
   def create
     @order = Order.new(params[:order])
-    @order.add_line_items_from_cart(current_cart)
-
+    #@order.add_line_items_from_cart(current_cart)
+    #cart = Cart.find(current_cart.id)
+   # pay = cart.total_price
     respond_to do |format|
       if @order.save
-        Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
+        #Cart.destroy(session[:cart_id])
+        #session[:cart_id] = nil
         Notifier.order_received(@order).deliver
+        #redirect_to @order.paypal_url(order_path(@order))
            #format.html { redirect_to (store_url), :notice => I18n.t('.thanks') }
-           format.html { redirect_to (@order), notice: 'User was successfully created.' }
+           format.html { redirect_to (@order), notice: 'Order was successfully created.' }
            #format.xml { render :xml => @order, :status => :created,:location => @order }
-            format.xml { render :show, :status => :created,:location => @order }
+           format.xml { render :show, :status => :created,:location => @order }
         else
          
           format.html { render :action => "new" }

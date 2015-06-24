@@ -3,12 +3,12 @@ DepotApp::Application.configure do
     config.after_initialize do
       ActiveMerchant::Billing::Base.mode = :test
       paypal_options = {
-      login: "API_USERNAME_HERE",
-      password: "API_PASSWORD_HERE",
-      signature: "API_SIGNATURE_HERE"
-    }
+        :login => "edwardmaya0008_api1.gmail.com",
+        :password => "9MZ4CD6NERZY77YL",
+        :signature => "AklW7jQ7Jz9LrfTvr5hj1iaQiZb6APnCuYSQTmNEijI3yeIXNDAdt.FT"
+      }
       ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
-end
+    end
 
 
   # Settings specified here will take precedence over those in config/application.rb

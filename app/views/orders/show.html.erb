@@ -26,7 +26,7 @@
 
 <div class="field">
     <h3>Pay Via Paypal</h3>
-    <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif") %>
+    <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), { :controller => "orders", :action => "paypalpayment"} %>
 </div>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |

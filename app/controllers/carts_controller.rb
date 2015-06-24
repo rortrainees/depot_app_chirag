@@ -15,6 +15,10 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.xml
   def show
+    @cart = current_cart
+  end
+=begin
+  def show
    begin
    @cart = Cart.find(params[:id])
    rescue ActiveRecord::RecordNotFound
@@ -27,7 +31,7 @@ class CartsController < ApplicationController
 end
 end
   end
-
+=end
   # GET /carts/new
   # GET /carts/new.xml
   def new

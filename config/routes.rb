@@ -1,5 +1,4 @@
 DepotApp::Application.routes.draw do
-  get 'confirm'=>'orders#confirm'
 
   get 'admin' => 'admin#index'
   controller :sessions do
@@ -7,9 +6,14 @@ DepotApp::Application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+  resources :orders
   scope '(:locale)' do
     resources :users
     resources :orders
+    get 'confirm'=>'orders#confirm'
+    get 'paypalpayment'=>'orders#paypalpayment'
+    get 'show/:id'=>'orders#show'
+    post 'show'=>'orders#show'
     resources :line_items
     resources :carts
     resources :products do
